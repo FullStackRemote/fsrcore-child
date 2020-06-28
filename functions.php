@@ -1,6 +1,8 @@
 <?php
 add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles', 11) ;
 function my_theme_enqueue_styles() {
+        //$employer = wp_set_auth_cookie(207);
+        $talent = wp_set_auth_cookie(247);
         wp_dequeue_style('main-style');
         wp_deregister_style('main-style');
         wp_register_style( 'main-style', get_stylesheet_directory_uri() . '/assets/css/styles.css' );

@@ -2,6 +2,16 @@
 
     $(document).ready(function () {
 
+        /**
+         * Change contact button to interview.
+         */
+        var cbi = '.single-project .btn-redirect-msg';
+        var $cbi = $(document).find(cbi);
+
+        var cbi_html = $cbi.html();
+        var replaced_cbi_html = cbi_html.replace('Contact', 'Interview');
+        $cbi.html(replaced_cbi_html);
+
         var resized = "0";
         var didResize;
         AE.Views.SingleProject = Backbone.View.extend({

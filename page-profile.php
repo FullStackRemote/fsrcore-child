@@ -16,7 +16,8 @@ global $wp_query, $ae_post_factory, $post, $current_user, $user_ID;
 $ae_users  = AE_Users::get_instance();
 $user_data = $ae_users->convert( $current_user->data );
 $user_role = ae_user_role( $current_user->ID );
-$role_conditional = fre_share_role() || ae_user_role( $user_ID ) == FREELANCER || 'administrator';
+$role_conditional = fre_share_role() || ae_user_role( $user_ID ) == FREELANCER || ae_user_role( $user_ID ) == 'administrator';
+$current_role_conditional = fre_share_role() || $user_role == FREELANCER || $user_role == 'administrator';
 //convert current profile
 $post_object = $ae_post_factory->get( PROFILE );
 
@@ -120,10 +121,11 @@ $currency = ae_get_option( 'currency', array(
 										<?php }
 									} ?>
                                 </span>
-
                             </div>
                             <div class="<?php echo $role_template; ?>-info-content">
                                 <div class="freelance-rating">
+                                        <span class="rate-it"
+                                              data-score="<?php echo $rating['rating_score']; ?>"></span>
 
 									<?php if ( $role_conditional ) { ?>
                                         <span class="freelance-empty-info">
@@ -220,7 +222,7 @@ $currency = ae_get_option( 'currency', array(
                                                placeholder="<?php _e( 'Your name', ET_DOMAIN ) ?>">
                                     </div>
 
-									<?php if ( $role_conditional ) { ?>
+									<?php if ( $current_role_conditional ) { ?>
                                         <div class="fre-input-field">
                                             <input type="text" name="et_professional_title"
 												<?php if ( $job_title ) {
@@ -239,7 +241,7 @@ $currency = ae_get_option( 'currency', array(
 											};
 										}
 										$validate_country = 0;
-										if ( $role_conditional ) {
+										if ( $current_role_conditional ) {
 											$validate_country = 1;
 										}
 										ae_tax_dropdown( 'country',
@@ -256,7 +258,7 @@ $currency = ae_get_option( 'currency', array(
 										?>
                                     </div>
 
-									<?php if ( $role_conditional ) { ?>
+									<?php if ( $current_role_conditional ) { ?>
                                         <div class="fre-input-field fre-experience-field">
                                             <input type="number" value="<?php echo $experience; ?>" name="et_experience"
                                                    id="et_experience" min="0"
@@ -326,7 +328,7 @@ $currency = ae_get_option( 'currency', array(
                         </div>
                     </div>
                     <?php do_action('pre_my_profile_section', $user_role);?>
-					<?php if ( $role_conditional ) { ?>
+					<?php if ( $current_role_conditional ) { ?>
                         <div class="profile-freelance-available">
                             <h2><?php _e( 'Available for hire', ET_DOMAIN ) ?></h2>
                             <!--<div class="fre-input-field">
@@ -445,12 +447,12 @@ $currency = ae_get_option( 'currency', array(
 
                 <?php do_action('after_my_account_block', $user_role);?>
 				<?php
-				if ( $role_conditional ) {
+				if ( $current_role_conditional ) {
 					get_template_part( 'list', 'portfolios' );
 					wp_reset_query();
 				} ?>
 
-				<?php if ( $role_conditional ) {
+				<?php if ( $current_role_conditional ) {
 					get_template_part( 'list', 'experiences' );
 					get_template_part( 'list', 'certifications' );
 					get_template_part( 'list', 'educations' );

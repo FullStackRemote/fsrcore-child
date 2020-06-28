@@ -141,7 +141,7 @@
                     ?>
                 </div>
                 <div class="fre-input-field">
-                    <label class="fre-field-title" for="project-budget"><?php _e('Your project maximum rate', ET_DOMAIN);?></label>
+                    <label class="fre-field-title" for="project-budget"><?php _e('Your job maximum rate', ET_DOMAIN);?></label>
                     <div class="fre-project-budget">
                         <input id="project-budget" step="5" required type="number" class="input-item text-field is_number numberVal" name="et_budget" min="1">
                         <span><?php echo fre_currency_sign(false);?></span>
@@ -168,7 +168,7 @@
                     echo '</ul>';
                 ?>
                 <div class="fre-post-project-btn">
-                    <button class="fre-btn fre-post-project-next-btn primary-bg-color" type="submit"><?php _e("Submit Project", ET_DOMAIN); ?></button>
+                    <button class="fre-btn fre-post-project-next-btn primary-bg-color" type="submit"><?php _e("Submit Job", ET_DOMAIN); ?></button>
                 </div>
             </div>
         </form>
