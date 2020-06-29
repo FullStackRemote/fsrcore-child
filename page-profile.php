@@ -70,10 +70,8 @@ if ( ! empty( $_GET['adminhash'] ) ) {
 	echo "<script> window.location.href = '" . et_get_page_link( "profile" ) . "'</script>";
 }
 
-$rating        = Fre_Review::employer_rating_score( $user_ID );
 $role_template = 'employer';
 if ( $role_conditional ) {
-	$rating        = Fre_Review::freelancer_rating_score( $user_ID );
 	$role_template = 'freelance';
 }
 
@@ -128,16 +126,16 @@ $currency = ae_get_option( 'currency', array(
                             </div>
                             <div class="<?php echo $role_template; ?>-info-content">
                                 <div class="freelance-rating">
-                                        <span class="rate-it"
-                                              data-score="<?php echo $rating['rating_score']; ?>"></span>
 
 									<?php if ( $role_conditional ) { ?>
                                         <span class="freelance-empty-info">
                                             <?php echo ! empty( $profile->experience ) ? $profile->experience : '<i>' . __( 'No year experience information', ET_DOMAIN ) . '</i>'; ?>
                                         </span>
-
-
                                         <span><?php printf( __('%s projects worked', ET_DOMAIN ), intval( $projects_worked ) ) ?> </span>
+                                        <span></span>
+                                        <?php if(!empty($hour_rate)): ?>
+                                        <span>Rate: $<?=$hour_rate?> / hour</span>
+                                        <?php endif ?>
 									<?php } else { ?>
                                         <span class=""><?php printf( __('%s projects posted', ET_DOMAIN ), $project_posted ) ?></span>
                                         <span> <?php printf(__( 'hire %s freelancers', ET_DOMAIN), $hire_freelancer ) ?></span>
