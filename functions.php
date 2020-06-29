@@ -38,6 +38,16 @@ function my_theme_enqueue_styles() {
             ), ET_VERSION, true );
             wp_enqueue_script('single-project');
         }
+
 }
+
+/**
+ * Admin Panel
+*/
+add_action( 'admin_enqueue_scripts', function ( $hook ) 
+{
+    wp_enqueue_script( 'admin_scripts', get_stylesheet_directory_uri() . '/assets/js/admin.js', array(), '1.0' );
+} );
+
 //Extend parent theme functionality
 require_once dirname(__FILE__) . '/customizer-child/child-functions.php';

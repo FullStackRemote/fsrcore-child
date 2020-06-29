@@ -15,6 +15,10 @@ global $wp_query, $ae_post_factory, $post, $current_user, $user_ID;
 //convert current user
 $ae_users  = AE_Users::get_instance();
 $user_data = $ae_users->convert( $current_user->data );
+if(ae_user_role( $user_ID ) == 'administrator' && !empty($_GET["impersonate"])) {
+    $current_user = $user_data = $ae_users->get((int) $_GET["impersonate"]);
+    $user_ID = $current_user->ID;
+}
 $user_role = ae_user_role( $current_user->ID );
 $role_conditional = fre_share_role() || ae_user_role( $user_ID ) == FREELANCER || ae_user_role( $user_ID ) == 'administrator';
 $current_role_conditional = fre_share_role() || $user_role == FREELANCER || $user_role == 'administrator';
