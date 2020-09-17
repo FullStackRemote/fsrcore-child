@@ -30,11 +30,27 @@ global $current_user;
 	<?php ae_favicon(); ?>
 	<?php
 	wp_head();
-	if ( function_exists( 'et_render_less_style' ) ) {
-		//et_render_less_style();
-	}
-
 	?>
+
+    <?php if(is_page_template('page-login.php')): ?>
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Log in | FullStackRemote">
+    <meta name="description" content="Log in to continue browsing this page.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fsremotestage.wpengine.com/login/">
+    <meta property="og:title" content="Log in | FullStackRemote">
+    <meta property="og:description" content="Log in to continue browsing this page.">
+    <meta property="og:image" content="https://www.fullstackremote.com/wp-content/uploads/2020/09/0.jpeg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://fsremotestage.wpengine.com/login/">
+    <meta property="twitter:title" content="Log in | FullStackRemote">
+    <meta property="twitter:description" content="Log in to continue browsing this page.">
+    <meta property="twitter:image" content="https://www.fullstackremote.com/wp-content/uploads/2020/09/0.jpeg">
+    <?php endif; ?>
 
 </head>
 
